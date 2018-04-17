@@ -1,0 +1,23 @@
+ var userRole = HttpContext.Current.Session["UserRole"] != null ? HttpContext.Current.Session["UserRole"] as List<AssociateRoles> : new List<AssociateRoles>();
+ 
+ 
+ 
+    if (associateProfile && associate.Anum == HttpContext.Session["anum"] as string)
+            {
+                HttpContext.Session.Clear();
+                HttpContext.Session["anum"] = associate.Anum;
+                HttpContext.Session["ShowPending"] = showPending;
+                
+                @{
+    ViewBag.Title = "Associates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var canAdd = false;
+    var userRole = HttpContext.Current.Session["UserRole"] != null
+        ? HttpContext.Current.Session["UserRole"] as List<AssociateRoles>
+        : new List<AssociateRoles>();
+    if ((userRole.Contains(AssociateRoles.AssociatesAdmin) && userRole.Contains(AssociateRoles.GroupsAdmin)) || userRole.Contains(AssociateRoles.Administrator))
+    {
+        canAdd = true;
+    }
+}
+ 
